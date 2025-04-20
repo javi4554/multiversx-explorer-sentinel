@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiversx Explorer Sentinel</title>
+  <style>
+    body {
+      font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      width: 380px;
+      padding: 16px;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+    }
+    
+    h1 {
+      font-size: 22px;
+      color: #23f7dd;
+      margin-bottom: 20px;
+      text-align: center;
+      letter-spacing: 1px;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(35, 247, 221, 0.3);
+    }
+    
+    .form-container {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #333;
+      box-shadow: 0 0 10px rgba(35, 247, 221, 0.1);
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #23f7dd;
+      font-size: 14px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    
+    input[type="text"]:focus {
+      border-color: #23f7dd;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(35, 247, 221, 0.25);
+    }
+    
+    button {
+      background-color: #23f7dd;
+      color: #121212;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      width: 100%;
+      font-size: 14px;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    button:hover {
+      background-color: #1ce0c7;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(35, 247, 221, 0.3);
+    }
+    
+    .blacklist-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333;
+    }
+    
+    .blacklist-title {
+      font-size: 16px;
+      color: #23f7dd;
+      font-weight: 600;
+    }
+    
+    .blacklist-count {
+      background-color: #23f7dd;
+      color: #121212;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    #blacklist {
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      padding: 16px;
+      max-height: 300px;
+      overflow-y: auto;
+      border: 1px solid #333;
+      margin-top: 20px;
+      box-shadow: 0 0 10px rgba(35, 247, 221, 0.1);
+    }
+    
+    .blacklist-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background-color: #2a2a2a;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border-left: 3px solid #23f7dd;
+      transition: all 0.2s ease;
+    }
+    
+    .blacklist-item:hover {
+      background-color: #333;
+    }
+    
+    .item-info {
+      flex-grow: 1;
+      overflow: hidden;
+    }
+    
+    .label {
+      font-weight: 600;
+      color: #ffffff;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    
+    .address {
+      font-size: 12px;
+      color: #aaa;
+      word-break: break-all;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 280px;
+    }
+    
+    .delete-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-left: 10px;
+      width: auto;
+      transition: all 0.2s ease;
+    }
+    
+    .delete-btn:hover {
+      background-color: #c82333;
+      transform: translateY(-1px);
+    }
+    
+    .empty-message {
+      text-align: center;
+      color: #777;
+      padding: 20px 10px;
+      font-style: italic;
+    }
+    
+    .search-container {
+      margin-bottom: 12px;
+      position: relative;
+    }
+    
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 14px;
+    }
+    
+    #search-blacklist {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      border-radius: 6px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-size: 13px;
+    }
+    
+    #search-blacklist:focus {
+      border-color: #23f7dd;
+      outline: none;
+    }
+    
+    /* Scrollbar styling */
+    #blacklist::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    #blacklist::-webkit-scrollbar-track {
+      background: #1e1e1e;
+    }
+    
+    #blacklist::-webkit-scrollbar-thumb {
+      background-color: #444;
+      border-radius: 4px;
+    }
+    
+    #blacklist::-webkit-scrollbar-thumb:hover {
+      background-color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Multiversx Explorer Sentinel</h1>
+  
+  <div class="form-container">
+    <div class="form-group">
+      <label for="address">Address:</label>
+      <input type="text" id="address" placeholder="Enter MultiversX address (erd1...)">
+    </div>
+    
+    <div class="form-group">
+      <label for="label">Label:</label>
+      <input type="text" id="label" placeholder="Enter a warning label (e.g. 'Scam Wallet')">
+    </div>
+    
+    <button id="add-to-blacklist">Add to Watchlist</button>
+  </div>
+  
+  <div id="blacklist">
+    <div class="blacklist-header">
+      <div class="blacklist-title">Watched Addresses</div>
+      <div class="blacklist-count" id="addresses-count">0</div>
+    </div>
+    
+    <div class="search-container">
+      <span class="search-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </span>
+      <input type="text" id="search-blacklist" placeholder="Search addresses or labels...">
+    </div>
+    <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+      <button id="export-blacklist" style="flex:1; background-color:#23f7dd; color:#121212; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path fill="#121212" d="M12 16a1 1 0 0 1-1-1V5a1 1 0 1 1 2 0v10a1 1 0 0 1-1 1Z"/><path fill="#121212" d="M16.707 12.707a1 1 0 0 1-1.414 0L13 10.414V19a1 1 0 1 1-2 0v-8.586l-2.293 2.293a1 1 0 0 1-1.414-1.414l4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1 0 1.414Z"/></svg>
+        Export
+      </button>
+      <button id="import-blacklist" style="flex:1; background-color:#23f7dd; color:#121212; display: flex; align-items: center; justify-content: center; gap: 6px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24"><path fill="#121212" d="M12 8a1 1 0 0 1 1 1v10a1 1 0 1 1-2 0V9a1 1 0 0 1 1-1Z"/><path fill="#121212" d="M7.293 11.293a1 1 0 0 1 1.414 0L11 13.586V5a1 1 0 1 1 2 0v8.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414Z"/></svg>
+        Import
+      </button>
+      <input type="file" id="import-file" accept="application/json" style="display:none;" />
+    </div>
+    
+    <div id="blacklist-items">
+      <div class="empty-message">No addresses in watchlist yet.</div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
