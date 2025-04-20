@@ -28,23 +28,29 @@ function highlightBlacklistedAddresses() {
 
 // Function to check and highlight the main address in the header
 function checkAddressHeader(blacklistMap) {
-  console.log("[MultiversX Blacklist] Checking address header...");
-  // Target the address span in the header
-  const addressElement = document.querySelector('span[data-testid="address"]');
-  
-  if (addressElement) {
-    const address = addressElement.textContent.trim();
-    console.log("[MultiversX Blacklist] Found address in header:", address);
-    
-    // Check if this address is in our blacklist
-    if (blacklistMap[address.toLowerCase()]) {
-      const label = blacklistMap[address.toLowerCase()];
-      console.log("[MultiversX Blacklist] Address is blacklisted:", label);
-      
-      // Highlight the address
-      highlightElement(addressElement, label, address);
+  console.log("[MultiversX Blacklist] Checking for spans with addresses...");
+
+  // Look for any span element containing an address
+  const addressSpans = document.querySelectorAll('span');
+
+  addressSpans.forEach(span => {
+    const text = span.textContent.trim();
+
+    // Check if the text matches the erd1 address pattern
+    if (text.match(/^erd1[a-z0-9]+$/i)) {
+      const address = text;
+      console.log("[MultiversX Blacklist] Found address in span:", address);
+
+      // Check if this address is in the blacklist
+      if (blacklistMap[address.toLowerCase()]) {
+        const label = blacklistMap[address.toLowerCase()];
+        console.log("[MultiversX Blacklist] Address is blacklisted:", label);
+
+        // Highlight the span
+        highlightElement(span, label, address);
+      }
     }
-  }
+  });
 }
 
 // Function to check and highlight addresses in transaction tables
@@ -173,8 +179,10 @@ function setupDOMObserver() {
             if (
               node.tagName === 'TABLE' || 
               node.tagName === 'TR' || 
+              node.tagName === 'SPAN' || 
               node.querySelector('table') || 
-              node.querySelector('tr')
+              node.querySelector('tr') || 
+              node.querySelector('span')
             ) {
               shouldCheck = true;
               break;

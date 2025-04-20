@@ -2,7 +2,7 @@
 
 ![MultiversX Explorer Sentinel Logo](images/icon128.png)
 
-A Chrome extension that enhances the MultiversX Explorer experience by highlighting and labeling potentially dangerous addresses.
+A Chrome extension that enhances the MultiversX Explorer and Web Wallet experience by highlighting and labeling potentially dangerous addresses.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Chrome Web Store](https://img.shields.io/badge/Chrome-Extension%20Coming%20Soon-orange)]()
@@ -10,7 +10,7 @@ A Chrome extension that enhances the MultiversX Explorer experience by highlight
 ## 🛡️ Features
 
 - **Address Watchlist**: Maintain a personal watchlist of MultiversX addresses with custom labels
-- **Visual Alerts**: Automatically highlights watched addresses with eye-catching visual styles
+- **Visual Alerts**: Automatically highlights watched addresses with eye-catching visual styles on both MultiversX Explorer and the MultiversX Wallet.
 - **Transaction Monitoring**: Identifies flagged addresses in transaction tables and account details
 - **Search Functionality**: Easily find and manage addresses in your watchlist
 - **Modern UI**: Clean, dark-themed interface with intuitive controls
@@ -19,11 +19,17 @@ A Chrome extension that enhances the MultiversX Explorer experience by highlight
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="docs/screenshots/main-interface.png" alt="Main Interface" width="400"/>
+  <img src="docs/screenshots/main-interface.png" alt="Main Interface" width="300"/>
   <p><em>Extension popup interface for managing watched addresses</em></p>
   
   <img src="docs/screenshots/explorer-highlight.png" alt="Explorer Highlighting" width="600"/>
   <p><em>Address highlighting on MultiversX Explorer</em></p>
+
+  <img src="docs/screenshots/web-wallet-transactions-highlight.png" alt="MultiversX Web Wallet Highlighting" width="600"/>
+  <p><em>Address highlighting on MultiversX Web Wallet</em></p>
+
+  <img src="docs/screenshots/web-wallet-send-highlight.png" alt="MultiversX Web Wallet Highlighting" width="300"/>
+  <p><em>Avoid errors while sending funds on MultiversX Web Wallet</em></p>
 </div>
 
 ## 🚀 Installation
@@ -57,8 +63,8 @@ The Chrome Web Store listing is coming soon. Please check back later.
 
 ### Viewing Highlighted Addresses
 
-1. Navigate to [MultiversX Explorer](https://explorer.multiversx.com/)
-2. Any addresses in your watchlist will be automatically highlighted with your custom label
+1. Navigate to [MultiversX Explorer](https://explorer.multiversx.com/) or the [MultiversX Wallet](https://wallet.multiversx.com/).
+2. Any addresses in your watchlist will be automatically highlighted with your custom label.
 3. Hover over highlighted addresses for additional information
 
 ## 🧩 Technical Details
@@ -66,8 +72,8 @@ The Chrome Web Store listing is coming soon. Please check back later.
 MultiversX Explorer Sentinel works by:
 
 1. Storing your watchlist in Chrome's sync storage (synced across your devices if you're signed into Chrome)
-2. Injecting a content script into MultiversX Explorer pages
-3. Scanning for addresses in specific page elements (headers, transaction tables)
+2. Injecting a content script into MultiversX Explorer and MultiversX Wallet pages.
+3. Scanning for addresses in specific page elements (headers, transaction tables, address displays)
 4. Applying custom CSS styles to highlight watched addresses
 5. Adding warning icons and replacing address display with your custom labels
 
