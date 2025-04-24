@@ -141,19 +141,27 @@ function checkTransactionTables(blacklistMap) {
 
 // Function to highlight an element
 function highlightElement(element, label, address) {
-  // Modify the element's text and style
+  // Check if this element has already been highlighted to avoid duplicate processing
+  if (element.getAttribute('data-blacklist-processed') === 'true') {
+    return; // Skip elements already processed
+  }
+  
+  // Mark this element as processed
+  element.setAttribute('data-blacklist-processed', 'true');
+  
+  // Store original content
   const originalText = element.textContent;
   
   // If the element contains only the address, replace it with the label
   if (originalText.trim() === address) {
     element.innerHTML = `<span class="blacklist-highlight" title="Blacklisted: ${label}">⚠️ ${label} ${address}</span>`;
-  } else {
-    // If the element contains other text, append the warning
-    element.innerHTML = `<span class="blacklist-highlight" title="Blacklisted: ${label}">⚠️ ${originalText}</span>  `;
-  }
+  } //else {
+  //   // If the element contains other text, append the warning
+  //   element.innerHTML = `<span class="blacklist-highlight" title="Blacklisted: ${label}">⚠️ ${originalText}</span>`;
+  // }
   
   // Apply the blacklist-highlight class
-//   element.classList.add('blacklist-highlight');
+  // element.classList.add('blacklist-highlight');
   
   // Add a title for hover info
   element.title = `Blacklisted Address: ${label}`;
